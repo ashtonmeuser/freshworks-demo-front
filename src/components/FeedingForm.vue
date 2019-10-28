@@ -7,6 +7,7 @@
         {{ f }}
       </option>
     </select>
+    <button v-on:click="submitForm"></button>
   </div>
 </template>
 
@@ -34,6 +35,11 @@ export default {
     time: mapStateMutation('time'),
     location: mapStateMutation('location'),
     foodType: mapStateMutation('foodType'),
+  },
+  methods: {
+    submitForm() {
+      this.$store.dispatch('submitForm');
+    },
   },
 };
 </script>

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Axios from 'axios';
 import constants from '../constants';
 
 Vue.use(Vuex);
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async submitForm({ state }) {
+      await Axios.post(constants.endpoints.create, state.form);
+    },
   },
   modules: {
   },
