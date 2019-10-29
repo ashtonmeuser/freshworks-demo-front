@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <img class="logo" src="https://via.placeholder.com/140x140">
-    <FeedingForm/>
+    <img
+      class="logo"
+      src="https://via.placeholder.com/140x140"
+    >
+    <FeedingForm />
   </div>
 </template>
 
@@ -9,7 +12,6 @@
 import FeedingForm from './components/FeedingForm.vue';
 
 export default {
-  name: 'app',
   components: {
     FeedingForm,
   },
@@ -20,7 +22,7 @@ export default {
 @import "./assets/variables.less";
 
 body {
-  background-color: @body-background;
+  background-color: @body-background-color;
 }
 #app {
   display: flex;
@@ -30,6 +32,8 @@ body {
   margin: 20px auto;
   .logo {
     align-self: center;
+    width: 140px;
+    height: 140px;
   }
 }
 </style>

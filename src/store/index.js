@@ -5,32 +5,24 @@ import constants from '../constants';
 
 Vue.use(Vuex);
 
+const defaultFormValues = {
+  location: { value: '', error: false },
+  time: { value: '', error: false },
+  foodType: { value: '', error: false },
+  foodQuantity: { value: 1, error: false },
+  duckQuantity: { value: 1, error: false },
+};
+
 export default new Vuex.Store({
   state: {
-    form: {
-      location: null,
-      time: null,
-      foodType: null,
-      foodQuantity: 1,
-      duckQuantity: 1,
-    },
+    form: { ...defaultFormValues },
   },
   mutations: {
-    updateLocation(state, location) {
-      state.form.location = location;
+    updateFormValue(state, payload) {
+      state.form[payload.key].value = payload.value;
     },
-    updateTime(state, time) {
-      state.form.time = time;
-    },
-    updateFoodType(state, foodType) {
-      if (!constants.foodTypes.includes(foodType)) return;
-      state.form.foodType = foodType;
-    },
-    updateFoodQuantity(state, foodQuantity) {
-      state.form.foodQuantity = foodQuantity;
-    },
-    updateDuckQuantity(state, duckQuantity) {
-      state.form.duckQuantity = duckQuantity;
+    resetForm(state) {
+      state.form = { ...defaultFormValues };
     },
   },
   actions: {
