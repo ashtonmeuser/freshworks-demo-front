@@ -9,7 +9,7 @@
 export default {
   props: {
     placeholder: { type: String, default: '' },
-    value: { type: String, required: true },
+    value: { type: [String, Number], required: true },
     type: { type: String, default: 'text' },
   },
   computed: {
