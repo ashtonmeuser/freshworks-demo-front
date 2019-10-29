@@ -1,44 +1,75 @@
 <template>
   <div class="feeding-form">
-    <input v-model="location">
-    <input v-model="time">
-    <select v-model="foodType">
-      <option v-for="f in constants.foodTypes" :key="f" :value="f">
-        {{ f }}
-      </option>
-    </select>
-    <button v-on:click="submitForm"></button>
+    <InputRow title="Location">
+      <TextInput v-model="location" />
+    </InputRow>
+    <InputRow title="Time">
+      <TextInput v-model="time" />
+    </InputRow>
+    <InputRow title="Food">
+      <SelectInput
+        v-model="foodType"
+        :options="constants.foodTypes"
+      />
+    </InputRow>
+    <InputRow title="Food Quantity">
+      <TextInput
+        v-model.number="foodQuantity"
+        type="number"
+      />
+    </InputRow>
+    <InputRow title="Duck Quantity">
+      <TextInput
+        v-model.number="duckQuantity"
+        type="number"
+      />
+    </InputRow>
+    <LargeButton :action="submitForm" />
   </div>
 </template>
 
 <script>
 import constants from '../constants';
+import InputRow from './InputRow.vue';
+import TextInput from './TextInput.vue';
+import SelectInput from './SelectInput.vue';
+import LargeButton from './LargeButton.vue';
 
-const mapStateMutation = (name, mutation) => ({
+const mapStateMutation = key => ({
   // Required setter and getter for all v-models
-  // Call with state.form property name and optional mutation name
-  // Uses default mutation format of camel-cased `update{name}`
+  // Call with state.form property key
+  // Commits updateFormValue mutation with key and value
   get() {
-    return this.$store.state.form[name];
+    return this.$store.state.form[key].value;
   },
   set(value) {
-    const defaultMutation = `update${name.charAt(0).toUpperCase()}${name.slice(1)}`;
-    this.$store.commit(mutation || defaultMutation, value);
+    this.$store.commit('updateFormValue', { key, value });
   },
 });
 
 export default {
-  beforeCreate() {
-    this.constants = constants; // Constants accessible in template
+  components: {
+    InputRow,
+    TextInput,
+    SelectInput,
+    LargeButton,
   },
   computed: {
     time: mapStateMutation('time'),
     location: mapStateMutation('location'),
     foodType: mapStateMutation('foodType'),
+    foodQuantity: mapStateMutation('foodQuantity'),
+    duckQuantity: mapStateMutation('duckQuantity'),
+  },
+  beforeCreate() {
+    this.constants = constants; // Constants accessible in template
   },
   methods: {
     submitForm() {
       this.$store.dispatch('submitForm');
+    },
+    validator(x) {
+      return typeof x === 'string' && !x.includes('a');
     },
   },
 };
