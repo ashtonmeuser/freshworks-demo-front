@@ -21,6 +21,7 @@ export default {
 @import "../assets/variables.less";
 
 button {
+  font-weight: bold;
   height: 50px;
   background-color: @header-background-color;
   border: none;

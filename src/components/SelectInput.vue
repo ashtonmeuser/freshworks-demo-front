@@ -1,7 +1,14 @@
 <template>
   <span class="select-wrapper">
     <select v-model="internalValue">
-      <option value="" selected disabled hidden>{{ placeholder }}</option>
+      <option
+        value=""
+        selected
+        disabled
+        hidden
+      >
+        {{ placeholder }}
+      </option>
       <option
         v-for="f in options"
         :key="f"

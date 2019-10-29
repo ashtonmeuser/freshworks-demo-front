@@ -4,7 +4,9 @@
       class="header-logo"
       src="https://via.placeholder.com/140x140"
     >
-    <h1 class="header-title">Untitled App</h1>
+    <h1 class="header-title">
+      Untitled App
+    </h1>
   </div>
 </template>
 

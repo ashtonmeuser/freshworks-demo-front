@@ -33,7 +33,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.foodQuantity.valid"
-      error-message="Please enter a numeral food quantity greater than 0"
+      error-message="Please enter a food quantity greater than 0"
       title="Food Quantity"
     >
       <TextInput
@@ -44,7 +44,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.duckQuantity.valid"
-      error-message="Please enter a numeral duck quantity greater than 0"
+      error-message="Please enter a duck quantity greater than 0"
       title="Duck Quantity"
     >
       <TextInput
@@ -67,7 +67,7 @@ import TextInput from './TextInput.vue';
 import SelectInput from './SelectInput.vue';
 import LargeButton from './LargeButton.vue';
 
-const mapStateMutation = key => ({
+const mapStateMutation = (key) => ({
   // Required setter and getter for all v-models
   // Call with state.form property key
   // Commits updateFormValue mutation with key and value

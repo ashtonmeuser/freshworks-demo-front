@@ -6,5 +6,10 @@ extends:
   - 'plugin:vue/recommended'
   - '@vue/airbnb'
 
+rules:
+  arrow-parens:
+    - error
+    - always
+
 parserOptions:
   parser: 'babel-eslint'

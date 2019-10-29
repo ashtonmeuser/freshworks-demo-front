@@ -6,11 +6,11 @@ import constants from '../constants';
 Vue.use(Vuex);
 
 const validators = {
-  location: v => typeof v === 'string' && v.match(/^.{4,}$/) !== null,
-  time: v => typeof v === 'string' && v.match(/^\d{2}:\d{2}$/) !== null,
-  foodType: v => typeof v === 'string' && constants.foodTypes.includes(v),
-  foodQuantity: v => typeof v === 'number' && v > 0,
-  duckQuantity: v => typeof v === 'number' && v > 0,
+  location: (v) => typeof v === 'string' && v.match(/^.{4,}$/) !== null,
+  time: (v) => typeof v === 'string' && v.match(/^\d{2}:\d{2}$/) !== null,
+  foodType: (v) => typeof v === 'string' && constants.foodTypes.includes(v),
+  foodQuantity: (v) => typeof v === 'number' && v > 0,
+  duckQuantity: (v) => typeof v === 'number' && v > 0,
 };
 const defaultFormValues = {
   location: { value: '', valid: true },
@@ -44,18 +44,17 @@ export default new Vuex.Store({
       // Submit form if all fields are valid
       store.commit('updateLoading', true);
       if (await store.dispatch('validateForm')) {
-        await Axios.post(constants.endpoints.create, store.state.form);
+        await Axios.post(constants.endpoints.feeding, store.state.form);
+        store.commit('resetForm', true);
       }
       store.commit('updateLoading', false);
     },
     validateForm(store) {
       // Update form fields current values, thus setting their respective valid properties
-      let valid = true;
-      Object.keys(store.state.form).forEach((key) => {
+      return Object.keys(store.state.form).reduce((accumulator, key) => {
         store.commit('updateFormValue', { key, value: store.state.form[key].value });
-        if (!store.state.form[key].valid) valid = false;
-      });
-      return valid;
+        return store.state.form[key].valid && accumulator;
+      }, true);
     },
   },
 });
