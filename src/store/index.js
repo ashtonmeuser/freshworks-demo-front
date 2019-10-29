@@ -23,6 +23,7 @@ const defaultFormValues = {
 export default new Vuex.Store({
   state: {
     form: { ...defaultFormValues },
+    loading: false,
   },
   mutations: {
     updateFormValue(state, payload) {
@@ -31,18 +32,30 @@ export default new Vuex.Store({
         valid: validators[payload.key](payload.value),
       };
     },
+    updateLoading(state, loading) {
+      state.loading = loading;
+    },
     resetForm(state) {
       state.form = { ...defaultFormValues };
     },
   },
   actions: {
-    async submitForm({ state }) {
-      await Axios.post(constants.endpoints.create, state.form);
+    async submitForm(store) {
+      // Submit form if all fields are valid
+      store.commit('updateLoading', true);
+      if (await store.dispatch('validateForm')) {
+        await Axios.post(constants.endpoints.create, store.state.form);
+      }
+      store.commit('updateLoading', false);
     },
     validateForm(store) {
+      // Update form fields current values, thus setting their respective valid properties
+      let valid = true;
       Object.keys(store.state.form).forEach((key) => {
         store.commit('updateFormValue', { key, value: store.state.form[key].value });
+        if (!store.state.form[key].valid) valid = false;
       });
+      return valid;
     },
   },
 });

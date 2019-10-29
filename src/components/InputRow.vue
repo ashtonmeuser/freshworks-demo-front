@@ -34,6 +34,7 @@ export default {
     font-size: 0.8em;
   }
   .error {
+    color: darken(@error-background-color, 60%);
     padding: 10px;
     font-size: 0.8em;
     background-color: @error-background-color;

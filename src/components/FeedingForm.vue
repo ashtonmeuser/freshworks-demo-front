@@ -2,7 +2,7 @@
   <div class="feeding-form">
     <InputRow
       :valid="$store.state.form.location.valid"
-      errorMessage="Please enter a valid location (4+ characters)"
+      error-message="Please enter a valid location (4+ characters)"
       title="Location"
     >
       <TextInput
@@ -12,7 +12,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.time.valid"
-      errorMessage="Please enter a time in HH:MM format"
+      error-message="Please enter a time in HH:MM format"
       title="Time"
     >
       <TextInput
@@ -22,7 +22,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.foodType.valid"
-      errorMessage="Please select a valid food type"
+      error-message="Please select a valid food type"
       title="Food"
     >
       <SelectInput
@@ -33,7 +33,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.foodQuantity.valid"
-      errorMessage="Please enter a numeral food quantity greater than 0"
+      error-message="Please enter a numeral food quantity greater than 0"
       title="Food Quantity"
     >
       <TextInput
@@ -44,7 +44,7 @@
     </InputRow>
     <InputRow
       :valid="$store.state.form.duckQuantity.valid"
-      errorMessage="Please enter a numeral duck quantity greater than 0"
+      error-message="Please enter a numeral duck quantity greater than 0"
       title="Duck Quantity"
     >
       <TextInput
@@ -53,7 +53,10 @@
         placeholder="Ducks fed"
       />
     </InputRow>
-    <LargeButton :action="submitForm" />
+    <LargeButton
+      :disabled="$store.state.loading"
+      :action="submitForm"
+    />
   </div>
 </template>
 
@@ -95,8 +98,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$store.dispatch('validateForm');
-      // this.$store.dispatch('submitForm');
+      this.$store.dispatch('submitForm');
     },
     validator(x) {
       return typeof x === 'string' && !x.includes('a');

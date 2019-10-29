@@ -1,5 +1,8 @@
 <template>
-  <button @click="action">
+  <button
+    :disabled="disabled"
+    @click="action"
+  >
     {{ title }}
   </button>
 </template>
@@ -9,6 +12,7 @@ export default {
   props: {
     action: { type: Function, required: true },
     title: { type: String, default: 'Submit' },
+    disabled: { type: Boolean, default: false },
   },
 };
 </script>
@@ -23,9 +27,14 @@ button {
   color: #fff;
   box-sizing: border-box;
   font-size: 1.2em;
-  &:hover {
+  &:hover:enabled,
+  &:active:enabled {
     cursor: pointer;
     background-color: darken(@header-background-color, 10%);
+  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
   }
 }
 </style>
