@@ -5,12 +5,19 @@ import constants from '../constants';
 
 Vue.use(Vuex);
 
+const validators = {
+  location: v => typeof v === 'string' && v.match(/^.{4,}$/) !== null,
+  time: v => typeof v === 'string' && v.match(/^\d{2}:\d{2}$/) !== null,
+  foodType: v => typeof v === 'string' && constants.foodTypes.includes(v),
+  foodQuantity: v => typeof v === 'number' && v > 0,
+  duckQuantity: v => typeof v === 'number' && v > 0,
+};
 const defaultFormValues = {
-  location: { value: '', error: false },
-  time: { value: '', error: false },
-  foodType: { value: '', error: false },
-  foodQuantity: { value: 1, error: false },
-  duckQuantity: { value: 1, error: false },
+  location: { value: '', valid: true },
+  time: { value: '', valid: true },
+  foodType: { value: '', valid: true },
+  foodQuantity: { value: 1, valid: true },
+  duckQuantity: { value: 1, valid: true },
 };
 
 export default new Vuex.Store({
@@ -19,7 +26,10 @@ export default new Vuex.Store({
   },
   mutations: {
     updateFormValue(state, payload) {
-      state.form[payload.key].value = payload.value;
+      state.form[payload.key] = {
+        value: payload.value,
+        valid: validators[payload.key](payload.value),
+      };
     },
     resetForm(state) {
       state.form = { ...defaultFormValues };
@@ -29,7 +39,10 @@ export default new Vuex.Store({
     async submitForm({ state }) {
       await Axios.post(constants.endpoints.create, state.form);
     },
-  },
-  modules: {
+    validateForm(store) {
+      Object.keys(store.state.form).forEach((key) => {
+        store.commit('updateFormValue', { key, value: store.state.form[key].value });
+      });
+    },
   },
 });

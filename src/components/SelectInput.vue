@@ -1,6 +1,6 @@
 <template>
   <span class="select-wrapper">
-    <select v-model="internalValue" value="asdf">
+    <select v-model="internalValue">
       <option value="" selected disabled hidden>{{ placeholder }}</option>
       <option
         v-for="f in options"

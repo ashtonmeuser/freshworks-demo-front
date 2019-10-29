@@ -4,6 +4,12 @@
       {{ title }}
     </div>
     <slot />
+    <div
+      v-if="!valid"
+      class="error"
+    >
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 
@@ -11,6 +17,8 @@
 export default {
   props: {
     title: { type: String, required: true },
+    valid: { type: Boolean, required: true },
+    errorMessage: { type: String, default: 'Invalid input' },
   },
 };
 </script>
@@ -24,6 +32,11 @@ export default {
   .input-row-title {
     color: @input-title-color;
     font-size: 0.8em;
+  }
+  .error {
+    padding: 10px;
+    font-size: 0.8em;
+    background-color: @error-background-color;
   }
 }
 </style>

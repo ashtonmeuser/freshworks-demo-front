@@ -1,32 +1,52 @@
 <template>
   <div class="feeding-form">
-    <InputRow title="Location">
+    <InputRow
+      :valid="$store.state.form.location.valid"
+      errorMessage="Please enter a valid location (4+ characters)"
+      title="Location"
+    >
       <TextInput
         v-model="location"
         placeholder="Victoria, BC"
       />
     </InputRow>
-    <InputRow title="Time">
+    <InputRow
+      :valid="$store.state.form.time.valid"
+      errorMessage="Please enter a time in HH:MM format"
+      title="Time"
+    >
       <TextInput
         v-model="time"
         placeholder="HH:MM"
       />
     </InputRow>
-    <InputRow title="Food">
+    <InputRow
+      :valid="$store.state.form.foodType.valid"
+      errorMessage="Please select a valid food type"
+      title="Food"
+    >
       <SelectInput
         v-model="foodType"
         :options="constants.foodTypes"
         placeholder="Select food"
       />
     </InputRow>
-    <InputRow title="Food Quantity">
+    <InputRow
+      :valid="$store.state.form.foodQuantity.valid"
+      errorMessage="Please enter a numeral food quantity greater than 0"
+      title="Food Quantity"
+    >
       <TextInput
         v-model.number="foodQuantity"
         type="number"
         placeholder="Amount of food"
       />
     </InputRow>
-    <InputRow title="Duck Quantity">
+    <InputRow
+      :valid="$store.state.form.duckQuantity.valid"
+      errorMessage="Please enter a numeral duck quantity greater than 0"
+      title="Duck Quantity"
+    >
       <TextInput
         v-model.number="duckQuantity"
         type="number"
@@ -75,7 +95,8 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$store.dispatch('submitForm');
+      this.$store.dispatch('validateForm');
+      // this.$store.dispatch('submitForm');
     },
     validator(x) {
       return typeof x === 'string' && !x.includes('a');
