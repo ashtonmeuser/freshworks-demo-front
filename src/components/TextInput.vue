@@ -2,6 +2,7 @@
   <input
     v-model="internalValue"
     :type="type"
+    :placeholder="placeholder"
   >
 </template>
 
@@ -34,6 +35,7 @@ input {
   height: @input-height;
   border: none;
   border-bottom: 1px solid @input-border-color;
-  padding: 0 5px;
+  padding: 0 0.5em;
+  font-size: 1.1em;
 }
 </style>

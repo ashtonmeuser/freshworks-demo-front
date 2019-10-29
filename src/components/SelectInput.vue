@@ -1,6 +1,7 @@
 <template>
   <span class="select-wrapper">
-    <select v-model="internalValue">
+    <select v-model="internalValue" value="asdf">
+      <option value="" selected disabled hidden>{{ placeholder }}</option>
       <option
         v-for="f in options"
         :key="f"
@@ -46,6 +47,7 @@ export default {
     box-sizing: border-box;
     height: @input-height;
     border: none;
+    font-size: 1.1em;
   }
 }
 </style>

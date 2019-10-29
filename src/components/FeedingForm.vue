@@ -1,27 +1,36 @@
 <template>
   <div class="feeding-form">
     <InputRow title="Location">
-      <TextInput v-model="location" />
+      <TextInput
+        v-model="location"
+        placeholder="Victoria, BC"
+      />
     </InputRow>
     <InputRow title="Time">
-      <TextInput v-model="time" />
+      <TextInput
+        v-model="time"
+        placeholder="HH:MM"
+      />
     </InputRow>
     <InputRow title="Food">
       <SelectInput
         v-model="foodType"
         :options="constants.foodTypes"
+        placeholder="Select food"
       />
     </InputRow>
     <InputRow title="Food Quantity">
       <TextInput
         v-model.number="foodQuantity"
         type="number"
+        placeholder="Amount of food"
       />
     </InputRow>
     <InputRow title="Duck Quantity">
       <TextInput
         v-model.number="duckQuantity"
         type="number"
+        placeholder="Ducks fed"
       />
     </InputRow>
     <LargeButton :action="submitForm" />
@@ -83,5 +92,11 @@ export default {
   padding: 20px 10px;
   box-sizing: border-box;
   width: 100%;
+  &>:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  &>:last-child {
+    margin-top: 20px;
+  }
 }
 </style>
