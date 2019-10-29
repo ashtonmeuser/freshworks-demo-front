@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <img
-      class="logo"
-      src="https://via.placeholder.com/140x140"
-    >
+    <Header />
     <FeedingForm />
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue';
 import FeedingForm from './components/FeedingForm.vue';
 
 export default {
   components: {
+    Header,
     FeedingForm,
   },
 };
@@ -23,17 +22,14 @@ export default {
 
 body {
   background-color: @body-background-color;
+  padding: 0;
+  margin: 0;
 }
 #app {
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  max-width: 500px;
-  margin: 20px auto;
-  .logo {
-    align-self: center;
-    width: 140px;
-    height: 140px;
-  }
+  align-items: center;
+  margin: 0 auto;
 }
 </style>

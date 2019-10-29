@@ -17,9 +17,11 @@ export default {
 @import "../assets/variables.less";
 
 button {
-  height: 35px;
-  background-color: #fff;
+  height: 50px;
+  background-color: @header-background-color;
   border: none;
-  border-bottom: 1px solid @input-border-color;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 1.2em;
 }
 </style>

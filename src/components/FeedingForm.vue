@@ -79,5 +79,9 @@ export default {
 .feeding-form {
   display: flex;
   flex-direction: column;
+  max-width: 500px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  width: 100%;
 }
 </style>
