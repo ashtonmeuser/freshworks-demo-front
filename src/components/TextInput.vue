@@ -30,6 +30,7 @@ export default {
 @import "../assets/variables.less";
 
 input {
+  margin: 0;
   background-color: @input-background-color;
   box-sizing: border-box;
   height: @input-height;
@@ -37,5 +38,11 @@ input {
   border-bottom: 1px solid @input-border-color;
   padding: 0 0.5em;
   font-size: 1.1em;
+  border-radius: 0;
+  &[type=number]::-webkit-inner-spin-button,
+  &[type=number]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
 }
 </style>

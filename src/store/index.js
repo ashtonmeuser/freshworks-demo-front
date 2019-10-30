@@ -43,10 +43,16 @@ export default new Vuex.Store({
     async submitForm(store) {
       // Submit form if all fields are valid
       store.commit('updateLoading', true);
-      if (await store.dispatch('validateForm')) {
-        await Axios.post(constants.endpoints.feeding, store.state.form);
-        store.commit('resetForm', true);
-      }
+      // Map from form objects to form values
+      const mappedForm = Object.keys(store.state.form).reduce((accumulator, key) => ({
+        ...accumulator, [key]: store.state.form[key].value,
+      }), {});
+      try {
+        if (await store.dispatch('validateForm')) { // If form fields are valid
+          await Axios.post(constants.endpoints.feeding, mappedForm);
+          store.commit('resetForm', true); // Reset fields to defaults
+        }
+      } catch (error) { /* FIXME: Handle error */ }
       store.commit('updateLoading', false);
     },
     validateForm(store) {

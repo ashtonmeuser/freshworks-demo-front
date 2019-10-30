@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header title="Untitled Duck App" />
     <FeedingForm />
   </div>
 </template>

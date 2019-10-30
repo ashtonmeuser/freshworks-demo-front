@@ -5,13 +5,16 @@
       src="https://via.placeholder.com/140x140"
     >
     <h1 class="header-title">
-      Untitled App
+      {{ title }}
     </h1>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    title: { type: String, required: true },
+  },
 };
 </script>
 

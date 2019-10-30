@@ -50,10 +50,12 @@ export default {
   border: none;
   border-bottom: 1px solid @input-border-color;
   select {
+    appearance: none;
     background-color: transparent;
     box-sizing: border-box;
     height: @input-height;
     border: none;
+    padding: 0 0.5em;
     font-size: 1.1em;
   }
 }
