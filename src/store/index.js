@@ -11,6 +11,7 @@ const validators = {
   foodType: (v) => typeof v === 'string' && constants.foodTypes.includes(v),
   foodQuantity: (v) => typeof v === 'number' && v > 0,
   duckQuantity: (v) => typeof v === 'number' && v > 0,
+  schedule: (v) => typeof v === 'string' && v.match(/^U?M?T?W?R?F?S?$/) !== null,
 };
 const defaultFormValues = {
   location: { value: '', valid: true },
@@ -18,6 +19,7 @@ const defaultFormValues = {
   foodType: { value: '', valid: true },
   foodQuantity: { value: 1, valid: true },
   duckQuantity: { value: 1, valid: true },
+  schedule: { value: '', valid: true },
 };
 
 export default new Vuex.Store({
