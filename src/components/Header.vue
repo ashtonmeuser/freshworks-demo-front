@@ -2,7 +2,7 @@
   <div class="header-container">
     <img
       class="header-logo"
-      src="https://via.placeholder.com/140x140"
+      src="../assets/duck.svg"
     >
     <h1 class="header-title">
       {{ title }}
@@ -30,7 +30,7 @@ export default {
   flex-direction: column;
   .header-logo {
     align-self: center;
-    width: 140px;
+    width: 117px;
     height: 140px;
   }
   .header-title {
