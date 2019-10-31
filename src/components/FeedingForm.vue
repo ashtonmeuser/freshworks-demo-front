@@ -53,6 +53,13 @@
         placeholder="Ducks fed"
       />
     </InputRow>
+    <InputRow
+      :valid="$store.state.form.schedule.valid"
+      error-message="Please select a valid feeding schedule"
+      title="Schedule Feeding"
+    >
+      <DayPicker v-model.number="schedule" />
+    </InputRow>
     <LargeButton
       :disabled="$store.state.loading"
       :action="submitForm"
@@ -65,6 +72,7 @@ import constants from '../constants';
 import InputRow from './InputRow.vue';
 import TextInput from './TextInput.vue';
 import SelectInput from './SelectInput.vue';
+import DayPicker from './DayPicker.vue';
 import LargeButton from './LargeButton.vue';
 
 const mapStateMutation = (key) => ({
@@ -84,6 +92,7 @@ export default {
     InputRow,
     TextInput,
     SelectInput,
+    DayPicker,
     LargeButton,
   },
   computed: {
@@ -92,6 +101,7 @@ export default {
     foodType: mapStateMutation('foodType'),
     foodQuantity: mapStateMutation('foodQuantity'),
     duckQuantity: mapStateMutation('duckQuantity'),
+    schedule: mapStateMutation('schedule'),
   },
   beforeCreate() {
     this.constants = constants; // Constants accessible in template
