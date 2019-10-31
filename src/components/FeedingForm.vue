@@ -56,7 +56,7 @@
     <InputRow
       :valid="$store.state.form.schedule.valid"
       error-message="Please select a valid feeding schedule"
-      title="Schedule Feeding"
+      title="Repeat Feeding"
     >
       <DayPicker v-model.number="schedule" />
     </InputRow>

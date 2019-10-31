@@ -10,7 +10,7 @@
         :data-weekday="d"
         @click="toggleDay"
       >
-        {{ d }}
+        {{ { U: 'S', R: 'T' }[d] || d }} <!-- Friendlier day notation -->
       </button>
     </li>
   </ol>
